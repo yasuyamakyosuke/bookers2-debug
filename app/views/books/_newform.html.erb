@@ -1,0 +1,23 @@
+<%= form_for(book_new) do |f| %>
+
+   <% if book_new.errors.any? %>
+<%= book_new.errors.count %>errors prohibited this obj from being saved:</h3>
+     <% book_new.errors.full_messages.each do |message| %>
+       <%= message %>
+     <% end %>
+     <% end %>
+
+	<div class="field row">
+		<%= f.label :title %>
+		<%= f.text_field :title, class: "col-xs-12 book_title" %>
+	</div>
+
+	<div class="field row">
+		<%= f.label :Opinion %> <!-- ここを変更 -->
+		<%= f.text_area :body, class:'col-xs-12'%>
+	</div>
+
+	<div class="actions row">
+		<%= f.submit class: "btn btn-primary col-xs-12" %>
+	</div>
+<% end %>
