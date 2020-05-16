@@ -5,15 +5,17 @@ class BooksController < ApplicationController
   	@book = Book.find(params[:id])
     @user = User.find(@book.user.id)
     @book_new = Book.new
+    @book_comment = BookComment.new
   end
 
   def index
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book_new = Book.new
     @user = current_user
+
   end
 
-  def create   
+  def create
   	@book_new = Book.new(book_params) #Bookモデルのテーブルを使用しているのでbookコントローラで保存する。
     @book_new.user_id = current_user.id
   	if @book_new.save #入力されたデータをdbに保存する。
@@ -42,9 +44,9 @@ class BooksController < ApplicationController
   	end
   end
 
-  def delete
+  def destroy
   	@book = Book.find(params[:id])
-  	@book.destoy
+  	@book.destroy
   	redirect_to books_path, notice: "successfully delete book!"
   end
 
